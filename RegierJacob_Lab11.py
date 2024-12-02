@@ -9,3 +9,7 @@ def create_tridiagonal_matrix(size, below_diag, diag, above_diag):
     np.fill_diagonal(matrix[:, 1:], above_diag)
     return matrix
 
+def compute_spectral_radius(matrix):
+    eigenvalues = np.linalg.eigvals(matrix)
+    return np.max(np.abs(eigenvalues))
+
