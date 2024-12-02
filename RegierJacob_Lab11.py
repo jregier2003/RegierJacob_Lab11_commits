@@ -13,3 +13,6 @@ def compute_spectral_radius(matrix):
     eigenvalues = np.linalg.eigvals(matrix)
     return np.max(np.abs(eigenvalues))
 
+def initialize_wavepacket(sigma, k, grid):
+    return np.exp(-grid**2 / (2 * sigma**2)) * np.cos(k * grid)
+
