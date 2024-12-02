@@ -36,4 +36,8 @@ def advection1d(method, nspace, ntime, tau_rel, params):
         A = create_tridiagonal_matrix(nspace, 0.5 * c * tau / h, 0, -0.5 * c * tau / h)
         np.fill_diagonal(A, 1)
 
+    for n in range(1, ntime):
+        a[:, n] = np.dot(A, a[:, n - 1])
+
+
     return a, x, t, A
