@@ -29,4 +29,11 @@ def advection1d(method, nspace, ntime, tau_rel, params):
     sigma, k = 0.2, 35  
     a[:, 0] = initialize_wavepacket(sigma, k, x)
 
-    return a, x, t
+    #calculate A matrix depending on method
+    if method == "ftcs":
+        A = create_tridiagonal_matrix(nspace, c * tau / (2 * h), 1, -c * tau / (2 * h))
+    elif method == "lax":
+        A = create_tridiagonal_matrix(nspace, 0.5 * c * tau / h, 0, -0.5 * c * tau / h)
+        np.fill_diagonal(A, 1)
+
+    return a, x, t, A
