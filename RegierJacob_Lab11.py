@@ -16,3 +16,17 @@ def compute_spectral_radius(matrix):
 def initialize_wavepacket(sigma, k, grid):
     return np.exp(-grid**2 / (2 * sigma**2)) * np.cos(k * grid)
 
+def advection1d(method, nspace, ntime, tau_rel, params):
+    L, c = params
+    h = L / nspace
+    tau = tau_rel * h / c
+
+    x = np.linspace(-L / 2, L / 2, nspace)
+    t = np.linspace(0, tau * ntime, ntime)
+    a = np.zeros((nspace, ntime))
+
+    #initial conditions
+    sigma, k = 0.2, 35  
+    a[:, 0] = initialize_wavepacket(sigma, k, x)
+
+    return a, x, t
