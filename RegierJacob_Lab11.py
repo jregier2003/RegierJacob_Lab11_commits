@@ -39,5 +39,7 @@ def advection1d(method, nspace, ntime, tau_rel, params):
     for n in range(1, ntime):
         a[:, n] = np.dot(A, a[:, n - 1])
 
+    if method == "ftcs" and compute_spectral_radius(A) > 1:
+        print("Warning: FTCS method is unstable for this configuration.")
 
     return a, x, t, A
